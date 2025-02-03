@@ -4,18 +4,20 @@ import { database } from './database.js';
 
 const server = fastify();
 
+const db = new database();
 
 
-server.post('/videos', () => {
+server.post('/videos', (request , reply) => {
 
-    const database = new database();
-
-    database.createVideo({
+    db.createVideo({
         title : 'Video 1',
-        description : 'LIVE CORTANDO 100 AMOEDAS',
+        description : 'LIVE CORTANDO 100 AMOEBAS',
         duration : '1:00:00',
     });
 
+    console.log(db.list());
+
+    return reply.status(201).send();
 
 
 })
@@ -24,22 +26,13 @@ server.get('/videos', () => {
     return ' hello world' ;
 });
 
-server.put('/videos', () => {
+server.put('/videos:id', () => {
 
 })
 
-server.delete('/videos', () => {
+server.delete('/videos/id', () => {
 
 })
-
-
-
-
-
-
-
-
-
 
 
 server.listen({
